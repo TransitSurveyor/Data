@@ -9,10 +9,11 @@ API_OUTPUT = "output_api"
 MOBILE_OUTPUT = "output_mobile"
 DATA_DIR = "source"
 SCHEMA = os.path.join(DATA_DIR, "schema.sql")
-ROUTES = os.path.join(DATA_DIR, "routes.shp")
-STOPS = os.path.join(DATA_DIR, "stops.shp")
+ROUTE_DIRECTIONS = os.path.join(DATA_DIR, "route_directions.csv")
+ROUTES = os.path.join(DATA_DIR, "tm_routes.shp")
+STOPS = os.path.join(DATA_DIR, "tm_route_stops.shp")
 
-ROUTE_IDS = ["9", "17", "193"]
+ROUTE_IDS = ["4", "9", "17", "193", "194", "195"]
 DIRECTION_IDS = ["0", "1"]
 
 # each "run" has route along with direction
@@ -56,10 +57,10 @@ def api_runner():
     subprocess.call(command,  shell=True) 
 
 
-def mobile_runner():
+def mobile_runner(route_ids=ROUTES):
     # clear output directory
     subprocess.call("rm -f {0}/*".format(MOBILE_OUTPUT),  shell=True) 
-    runs = itertools.product(ROUTE_IDS, DIRECTION_IDS)
+    runs = itertools.product(route_ids, DIRECTION_IDS)
     for run in runs:
         stops, stops_output = build_stops_command(*run)
         routes, routes_output = build_routes_command(*run)
@@ -99,9 +100,15 @@ def build_routes_command(route, direction):
     command = routes_command.format(sql_command, SIMPLIFY, output, ROUTES) 
     return command, output
 
+
+def route_ids(filepath):
+    with open(filepath, 'rb') as f:
+        return list(set([row['rte'] for row in csv.DictReader(f)]))
+
 if __name__ == "__main__":
-    mobile_runner()
-    api_runner()
+    routes = route_ids(ROUTE_DIRECTIONS)
+    mobile_runner(route_ids=routes)
+    #api_runner()
     
 
 

@@ -15,4 +15,4 @@ These commands need to be available and on your path
 
 ### Deploying
 
-After running `build.py` both `Data/output_mobile` and `Data/output_api` will be populated with fresh data. This data will need to be copied into the `MobileSurveyor/data_inputs` and `API/data_inputs` in the respective repositories.
+After running `build.py` both `Data/output_mobile` and `Data/output_api` will be populated with fresh data.
