@@ -163,7 +163,7 @@ CREATE TABLE stops (
     stop_name character varying(50),
     jurisdic varchar,
     zipcode varchar,
-    frequence boolean,
+    frequent boolean,
     geom geometry(Point,2913)
 );
 
