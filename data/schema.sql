@@ -157,12 +157,15 @@ CREATE TABLE stops (
     dir smallint,
     rte_desc character varying(50),
     dir_desc character varying(50),
+    "type" varchar,
     stop_seq integer,
     stop_id integer,
     stop_name character varying(50),
+    jurisdic varchar,
+    zipcode varchar,
+    frequence boolean,
     geom geometry(Point,2913)
 );
-
 
 --
 -- Foreign Key Constrains

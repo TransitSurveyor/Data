@@ -7,7 +7,7 @@ import csv, subprocess, os, itertools
 
 API_OUTPUT = "output_api"
 MOBILE_OUTPUT = "output_mobile"
-DATA_DIR = "source"
+DATA_DIR = "data"
 SCHEMA = os.path.join(DATA_DIR, "schema.sql")
 ROUTE_DIRECTIONS = os.path.join(DATA_DIR, "route_directions.csv")
 ROUTES = os.path.join(DATA_DIR, "tm_routes.shp")
@@ -108,7 +108,7 @@ def route_ids(filepath):
 if __name__ == "__main__":
     routes = route_ids(ROUTE_DIRECTIONS)
     mobile_runner(route_ids=routes)
-    #api_runner()
+    api_runner()
     
 
 

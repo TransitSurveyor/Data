@@ -3,3 +3,4 @@
 *.pyc
 output_mobile
 output_api
+data/tm_route*
